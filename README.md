@@ -7,4 +7,5 @@ Final project for Optimization of Data Science course. Implementation of Frank-W
         - $L_{bar} > L$, 
         - $\gamma_{1}$ and 
         - $\gamma_{2}$.
-* 
+* Do SVD every time or "optimize" it following the paper
+
