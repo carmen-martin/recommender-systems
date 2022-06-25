@@ -1,11 +1,8 @@
 # recommender-systems
-Final project for Optimization of Data Science course. Implementation of Frank-Wolfe algorithm and Franck-Wolfe with "in-face" directions.
+Implementation of Frank-Wolfe algorithm and Franck-Wolfe with "in-face" directions for matrix completition.
 
-# IDEAS:
-* For the FW In-face algorithm, do a Grid Search with different values of 
-        - $\delta$, 
-        - $L_{bar} > L$, 
-        - $\gamma_{1}$ and 
-        - $\gamma_{2}$.
-* Do SVD every time or "optimize" it following the paper
+# Organization:
+* In the 'matricesFW' file you can find the different functions needed for doing the matrix completition problem.
+* An example of how to implement it is in the GeneratedData_example file
+* An implementation on a real world dataset can be found in the FW_GoodReads_
 
