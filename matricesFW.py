@@ -1,6 +1,7 @@
 # Set of functions for matrix completition using the Frank Wolfe algorithm and variants
 import numpy as np
 from scipy import sparse
+import scipy.sparse.linalg
 
 
 # FW objective function
@@ -9,7 +10,7 @@ def FW_objective_function(diff_vec):
 
 # Binary search for alpha stop
 def alpha_binary_search(Zk, Dk, delta, max_value=1, min_value=0, tol=0.1):
-    # Inizialization
+    # Initialization
     best_alpha = step = (max_value - min_value) / 2
 
     # Binary Search
@@ -28,32 +29,27 @@ def alpha_binary_search(Zk, Dk, delta, max_value=1, min_value=0, tol=0.1):
     return best_alpha
 
 def compute_best_beta(Zk, X_rated, Dk, idx_rows, idx_cols, alpha_stop, stepsize = 0.003, tol = 0.001):
+    best_beta = alpha_stop / 2
 
-  best_beta = alpha_stop / 2
+    step = tol
 
-  step = tol
+    while step >= tol:
 
-  while step >= tol:
+        Zk = Zk + best_beta * Dk                              # compute new Zk
+        Z_rated = Zk[idx_rows, idx_cols]                      # take only known values
+        diff_vec = np.array(Z_rated - X_rated)[0].sum()       # compute the difference vector
+        #loss = 0.5*(np.power(diff_vec,2).sum())              # compute the loss # didn't take this one because it's always positive!
 
-    Zk = Zk + best_beta * Dk                              # compute new Zk
-    Z_rated = Zk[idx_rows, idx_cols]                      # take only known values
-    diff_vec = np.array(Z_rated - X_rated)[0].sum()       # compute the difference vector
-    #loss = 0.5*(np.power(diff_vec,2).sum())              # compute the loss # didn't take this one because it's always positive!
+        step = diff_vec * stepsize
+        best_beta = best_beta + step
 
-    step = diff_vec * stepsize
-    best_beta = best_beta + step
+        if best_beta <= 0:
+            return 0
 
-    if best_beta <= 0:
-      best_beta = 0
-      break
+        if best_beta >= alpha_stop:
+            return alpha_stop
 
-    if best_beta >= alpha_stop:
-      best_beta = alpha_stop
-      break
-
-  return best_beta
-
-
+    return best_beta
 
 # Regular FW algorithm
 def FrankWolfe(X, objective_function, delta, empties=0, printing = True, Z_init=None, max_iter=150, patience=1e-5):
