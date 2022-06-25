@@ -3,6 +3,6 @@ Implementation of Frank-Wolfe algorithm and Franck-Wolfe with "in-face" directio
 
 # Organization:
 * In the 'matricesFW' file you can find the different functions needed for doing the matrix completition problem.
-* An example of how to implement it is in the GeneratedData_example file
-* An implementation on a real world dataset can be found in the FW_GoodReads_
+* An example of how to implement it is in the GeneratedData_example notebook
+* An implementation on a real world dataset can be found in the FW_GoodReads_recommender notebook
 
