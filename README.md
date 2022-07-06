@@ -1,5 +1,4 @@
-# recommender-systems
-Implementation of Frank-Wolfe algorithm and Franck-Wolfe with "in-face" directions for matrix completition.
+Implementation of the Frank-Wolfe algorithm and the Frank-Wolfe with "in-face" directions for matrix completition problem.
 
 # Organization:
 * In the 'matricesFW' file you can find the different functions needed for doing the matrix completition problem.
